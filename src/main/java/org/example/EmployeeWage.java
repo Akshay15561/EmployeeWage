@@ -4,6 +4,9 @@ import java.util.Random;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class EmployeeWage {
     public static void main(String[] args) {
+        // Constants
+        final int WAGE_PER_HOUR = 20; // Example hourly wage
+        final int FULL_DAY_HOURS = 8;
 
         System.out.println("Welcome to Employee Wage Computation");
         // Create a Random object
@@ -15,8 +18,11 @@ public class EmployeeWage {
         // Check attendance and display the result
         if (attendance == 1) {
             System.out.println("Present");
+            int dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
+            System.out.println("Daily Wage: $" + dailyWage);
         } else {
             System.out.println("Absent");
+            System.out.println("Daily Wage: $0");
         }
 
 
