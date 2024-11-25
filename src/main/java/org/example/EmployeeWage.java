@@ -18,19 +18,25 @@ public class EmployeeWage {
         int attendance = random.nextInt(3); // 0 for Absent, 1 for Present
 
         // Check attendance and display the result
-        if (attendance == 1) {
-            System.out.println("Present");
-            int dailyWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
-            System.out.println("Daily Wage: $" + dailyWage);
-        } else if(attendance == 2) {
-            System.out.println("Present (Part-Time)");
-            int dailyWage = WAGE_PER_HOUR * PART_TIME_HOURS;
-            System.out.println("Daily Wage: $" + dailyWage);
-        } else{
-            System.out.println("Absent");
-            System.out.println("Daily Wage: $0");
-        }
+        switch (attendance) {
+            case 1: // Full-Time
+                System.out.println("Present (Full-Time)");
+                int fullTimeWage = WAGE_PER_HOUR * FULL_DAY_HOURS;
+                System.out.println("Daily Wage: $" + fullTimeWage);
+                break;
 
+            case 2: // Part-Time
+                System.out.println("Present (Part-Time)");
+                int partTimeWage = WAGE_PER_HOUR * PART_TIME_HOURS;
+                System.out.println("Daily Wage: $" + partTimeWage);
+                break;
+
+            case 0: // Absent
+            default:
+                System.out.println("Absent");
+                System.out.println("Daily Wage: $0");
+                break;
+        }
 
 
     }
