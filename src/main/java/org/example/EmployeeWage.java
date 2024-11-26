@@ -4,27 +4,24 @@ import java.util.Random;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class EmployeeWage {
 
-        // Constants
-        static final int WAGE_PER_HOUR = 20; // Example hourly wage
-        static final int FULL_DAY_HOURS = 8;
-        static final int PART_TIME_HOURS = 4; // Hours for part-time
-        static final int MAX_WORKING_HOURS = 100; // Maximum working hours in a month
-        static final int MAX_WORKING_DAYS = 20;   // Maximum working days in a month
-
-        // Variables
-        static int totalWorkingHours = 0;
-        static int totalWorkingDays = 0;
-        static int monthlyWage = 0;
 
     public static void main(String[] args) {
 
 
         System.out.println("Welcome to Employee Wage Computation");
+        computeEmployeeWage("Company A", 20, 20, 100);
+        computeEmployeeWage("Company B", 25, 22, 120);
+        computeEmployeeWage("Company C", 18, 18, 90);
 
-        computeEmployeeWage();
-        displaySummary();
+
     }
-        public static void computeEmployeeWage() {
+    public static void computeEmployeeWage(String companyName, int wagePerHour, int MAX_WORKING_DAYS, int MAX_WORKING_HOURS) {
+        System.out.println("\nComputing wages for " + companyName);
+
+        // Local variables
+        int totalWorkingHours = 0;
+        int totalWorkingDays = 0;
+        int monthlyWage = 0;
             Random random = new Random();
         // Continue working until either the hours or days limit is reached
         while (totalWorkingHours < MAX_WORKING_HOURS && totalWorkingDays < MAX_WORKING_DAYS) {
@@ -41,35 +38,32 @@ public class EmployeeWage {
             switch (attendance) {
                 case 1: // Full-Time
                     System.out.println("Present (Full-Time)");
-                    dailyHours = FULL_DAY_HOURS;
+                    dailyHours = 8;
                     break;
 
                 case 2: // Part-Time
                     System.out.println("Present (Part-Time)");
-                    dailyHours = PART_TIME_HOURS;
+                    dailyHours = 4;
                     break;
 
                 case 0: // Absent
                 default:
                     System.out.println("Absent");
+                    dailyHours = 0;
                     break;
             }
-            // Add the daily hours to total working hours
-            totalWorkingHours += dailyHours;
 
 
-            // Stop if total working hours exceed the limit
-            if (totalWorkingHours >= MAX_WORKING_HOURS) {
-                totalWorkingHours -= dailyHours;
-                break;
-            }
-            monthlyWage += dailyHours * WAGE_PER_HOUR;
-
+            if (totalWorkingHours + dailyHours <= MAX_WORKING_HOURS) {
+                totalWorkingHours += dailyHours;
+                monthlyWage += dailyHours * wagePerHour;
             }
 
+            }
+        displaySummary(companyName, totalWorkingDays, totalWorkingHours, monthlyWage);
         }
-        public static void displaySummary() {
-            System.out.println("\nSummary:");
+    public static void displaySummary(String companyName, int totalWorkingDays, int totalWorkingHours, int monthlyWage) {
+        System.out.println("\nSummary for " + companyName + ":");
             System.out.println("Total Working Days: " + totalWorkingDays);
             System.out.println("Total Working Hours: " + totalWorkingHours);
             System.out.println("Monthly Wage: $" + monthlyWage);
